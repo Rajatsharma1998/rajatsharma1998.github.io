@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rajat Sharma | Backend Developer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #1e3a5f;
+      --blue: #2563eb;
+      --light: #f0f4ff;
+      --text: #1a1a1a;
+      --muted: #555;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--navy);
+      padding: 14px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .nav-logo { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+    .nav-links { display: flex; gap: 30px; }
+    .nav-links a { color: #a8c4e0; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 100%);
+      color: #fff;
+      padding: 120px 60px 80px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-content { max-width: 700px; }
+    .hero-greeting { font-size: 18px; color: #a8c4e0; margin-bottom: 12px; }
+    .hero-name { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; letter-spacing: -1px; }
+    .hero-title { font-size: 22px; color: #7eb8e0; margin-bottom: 24px; font-weight: 400; }
+    .hero-desc { font-size: 16px; color: #c8dff0; line-height: 1.8; max-width: 580px; margin-bottom: 36px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      padding: 13px 28px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-outline { border: 2px solid #a8c4e0; color: #a8c4e0; }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: #fff; }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .stat-num { font-size: 32px; font-weight: 800; color: #fff; }
+    .stat-label { font-size: 13px; color: #a8c4e0; margin-top: 2px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 60px; max-width: 1100px; margin: auto; }
+
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: var(--blue);
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 22px 24px;
+      border-left: 4px solid var(--blue);
+    }
+    .skill-card h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      background: #fff;
+      border: 1px solid #c7d9f5;
+      color: var(--navy);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-weight: 500;
+    }
+    .tag.ai { background: #fef3c7; border-color: #fcd34d; color: #92400e; }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 0; bottom: 0;
+      width: 2px;
+      background: #dde8f8;
+    }
+    .exp-item { position: relative; margin-bottom: 40px; }
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+    .exp-title { font-size: 18px; font-weight: 700; color: var(--navy); }
+    .exp-company { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+    .exp-date {
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .exp-item ul { padding-left: 18px; }
+    .exp-item li { font-size: 14px; color: #333; margin-bottom: 6px; line-height: 1.6; }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      border: 1px solid #e2eaf8;
+      border-radius: 12px;
+      padding: 26px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .project-card:hover { box-shadow: 0 8px 24px rgba(30,58,95,0.12); transform: translateY(-3px); }
+    .project-card h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .project-card p { font-size: 13.5px; color: #444; line-height: 1.65; margin-bottom: 14px; }
+    .project-tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .p-tag { background: var(--light); color: var(--navy); font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: 4px; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); max-width: 100%; padding: 80px 60px; }
+    #contact .section-title { color: #fff; }
+    #contact .section-title::after { background: #7eb8e0; }
+    #contact .section-tag { color: #a8c4e0; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 22px 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .contact-card .c-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #a8c4e0; margin-bottom: 6px; font-weight: 700; }
+    .contact-card .c-value { font-size: 14px; color: #fff; font-weight: 500; }
+    .contact-card a.c-value:hover { color: #7eb8e0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0f2440;
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      color: #a8c4e0;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--light); max-width: 100%; }
+    #about .about-inner { max-width: 1100px; margin: auto; padding: 80px 60px; }
+    .about-text { font-size: 16px; line-height: 1.9; color: #333; max-width: 760px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">RS</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-greeting">Hello, I'm</div>
+      <div class="hero-name">Rajat Sharma</div>
+      <div class="hero-title">Backend Developer &amp; AI Integration Specialist</div>
+      <div class="hero-desc">
+        I build scalable REST APIs, microservices, and cloud-native backend systems using
+        Node.js, Nest.js, and TypeScript. Passionate about integrating AI/LLM capabilities
+        to automate workflows and build intelligent applications.
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary">Hire Me</a>
+        <a href="#projects" class="btn btn-outline">View Projects</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Projects Delivered</div>
+        </div>
+        <div>
+          <div class="stat-num">30%</div>
+          <div class="stat-label">API Performance Boost</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about">
+    <div class="about-inner">
+      <div class="section-tag">About Me</div>
+      <div class="section-title">Who I Am</div>
+      <div class="about-text">
+        I'm a Backend Developer with 5+ years of IT experience, including 2.5+ years of dedicated backend
+        development. I specialize in building production-grade REST APIs and microservices using Node.js,
+        Nest.js, and TypeScript. I've worked across cloud infrastructure (AWS), containerization (Docker,
+        Kubernetes), and databases (MySQL, PostgreSQL, MongoDB).<br/><br/>
+        I'm passionate about the intersection of backend engineering and AI — integrating LLM capabilities
+        using OpenAI API and LangChain.js to automate workflows and build smarter systems. I take pride in
+        clean architecture, performance optimization, and delivering reliable systems at scale.
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-tag">What I Know</div>
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <h4>Backend</h4>
+        <div class="skill-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">Nest.js</span>
+          <span class="tag">Express.js</span>
+          <span class="tag">AdonisJS</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">GraphQL</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">ES6+</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h4>AI / LLM</h4>
+        <div class="skill-tags">
+          <span class="tag ai">OpenAI API</span>
+          <span class="tag ai">LangChain.js</span>
+          <span class="tag ai">Prompt Engineering</span>
+          <span class="tag ai">RAG Pipelines</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h4>Cloud / DevOps</h4>
+        <div class="skill-tags">
+          <span class="tag">AWS Lambda</span>
+          <span class="tag">AWS S3</span>
+          <span class="tag">AWS SES</span>
+          <span class="tag">AWS RDS</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Nginx</span>
+          <span class="tag">CI/CD</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h4>Databases</h4>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">Redis</span>
+          <span class="tag">Elasticsearch</span>
+          <span class="tag">Sequelize ORM</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h4>Messaging</h4>
+        <div class="skill-tags">
+          <span class="tag">RabbitMQ</span>
+          <span class="tag">Kafka</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h4>Security &amp; Tools</h4>
+        <div class="skill-tags">
+          <span class="tag">JWT</span>
+          <span class="tag">RBAC</span>
+          <span class="tag">bcrypt</span>
+          <span class="tag">Git</span>
+          <span class="tag">Postman</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Jira</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" style="background:#fafbff; max-width:100%; padding: 80px 0;">
+    <div style="max-width:1100px; margin:auto; padding: 0 60px;">
+      <div class="section-tag">Where I've Worked</div>
+      <div class="section-title">Experience</div>
+      <div class="timeline">
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Backend Developer</div>
+            <div class="exp-date">Sep 2023 - Present</div>
+          </div>
+          <div class="exp-company">Shallowfeet Consulting, Jaipur, India</div>
+          <ul>
+            <li>Engineered role-based access control (RBAC) for REST APIs using Node.js, Nest.js, and AWS RDS — reducing unauthorized access incidents by <strong>60%</strong> across all microservices.</li>
+            <li>Integrated OpenAI API to automate content generation and data extraction workflows, reducing manual effort by <strong>40%</strong>.</li>
+            <li>Implemented event-driven automations using AWS Lambda and cron-based schedulers for background processing.</li>
+            <li>Optimized API middleware using Express.js and AdonisJS, improving average response time by <strong>30%</strong>.</li>
+            <li>Built microservices architecture using Docker and RabbitMQ; integrated Message91, Amazon SES, and Mailjet.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-title">Quality Assurance Engineer</div>
+            <div class="exp-date">May 2021 - Aug 2023</div>
+          </div>
+          <div class="exp-company">Fleek IT Solutions, Noida, India</div>
+          <ul>
+            <li>Tested and validated backend REST APIs across multiple product modules; tracked bugs via Jira and ClickUp.</li>
+            <li>Collaborated with developers across all SDLC phases, integrating QA at each stage of development.</li>
+            <li>Contributed to backend bug fixes and feature testing, transitioning toward server-side development.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-tag">What I've Built</div>
+    <div class="section-title">Projects</div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <h3>Vendor Management Dashboard</h3>
+        <p>Vendor portal for managing product inventory, purchase orders, GRN records, and payment tracking across Distribution and Fulfillment Centers.</p>
+        <div class="project-tech-tags">
+          <span class="p-tag">Node.js</span>
+          <span class="p-tag">Express.js</span>
+          <span class="p-tag">TypeScript</span>
+          <span class="p-tag">MySQL</span>
+          <span class="p-tag">Sequelize</span>
+          <span class="p-tag">Redis</span>
+          <span class="p-tag">JWT</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>Keepers Landway</h3>
+        <p>Tour management platform for tourists, guides, and drivers with real-time geolocation tracking and admin oversight panel.</p>
+        <div class="project-tech-tags">
+          <span class="p-tag">Node.js</span>
+          <span class="p-tag">Nest.js</span>
+          <span class="p-tag">MySQL</span>
+          <span class="p-tag">Firebase</span>
+          <span class="p-tag">Geocoordinates</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>Revcorp — ERP Software</h3>
+        <p>ERP project management software with microservice-based REST APIs, automated workflows using AWS Lambda, and Docker deployment.</p>
+        <div class="project-tech-tags">
+          <span class="p-tag">Node.js</span>
+          <span class="p-tag">AdonisJS 5</span>
+          <span class="p-tag">MySQL</span>
+          <span class="p-tag">AWS Lambda</span>
+          <span class="p-tag">Docker</span>
+          <span class="p-tag">Elasticsearch</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>AnytimeDoc</h3>
+        <p>Online telemedicine and consultation platform connecting patients with doctors for real-time medical consultations.</p>
+        <div class="project-tech-tags">
+          <span class="p-tag">Node.js</span>
+          <span class="p-tag">REST APIs</span>
+          <span class="p-tag">Firebase</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>Revnations</h3>
+        <p>Social media platform exclusively for bike riders — community posts, rides, events, and group management.</p>
+        <div class="project-tech-tags">
+          <span class="p-tag">Node.js</span>
+          <span class="p-tag">MongoDB</span>
+          <span class="p-tag">REST APIs</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div id="contact">
+    <div style="max-width:1100px; margin:auto; padding: 0 60px 0;">
+      <div class="section-tag">Get In Touch</div>
+      <div class="section-title">Contact Me</div>
+    </div>
+    <div class="contact-grid" style="max-width:1100px; margin:auto; padding: 0 60px 80px;">
+      <div class="contact-card">
+        <div class="c-label">Phone</div>
+        <div class="c-value">+91-7017759117</div>
+      </div>
+      <div class="contact-card">
+        <div class="c-label">Email</div>
+        <a href="mailto:sharmaa.rajat99@gmail.com" class="c-value">sharmaa.rajat99@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="c-label">LinkedIn</div>
+        <a href="https://linkedin.com/in/sharmaa-rajat99" target="_blank" class="c-value">sharmaa-rajat99</a>
+      </div>
+      <div class="contact-card">
+        <div class="c-label">GitHub</div>
+        <a href="https://github.com/Rajatsharma1998" target="_blank" class="c-value">Rajatsharma1998</a>
+      </div>
+      <div class="contact-card">
+        <div class="c-label">Location</div>
+        <div class="c-value">Jaipur, India</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Rajat Sharma &nbsp;|&nbsp; Backend Developer
+  </footer>
+
+</body>
+</html>
